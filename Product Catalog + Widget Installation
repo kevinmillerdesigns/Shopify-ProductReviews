@@ -1,0 +1,32 @@
+{% assign variant = product.first_available_variant %}
+<script>
+  
+  let variantskus = [];
+  {% for product_variant in product.variants %}
+  variantskus.push({sku: "{{product_variant.sku}}",
+                   name: "{{ product.title }}",
+                   gtin: "{{product_variant.barcode}}",
+                   img: "{{ product.featured_media.preview_image | image_url: width: 500 }}",
+                   url: "https://replace.myshopify.com{{ product.url }}",
+                   parent_id: "{{ product.title}}"});
+  
+  {% endfor %}
+  
+  
+var __RRPRWidget_Settings = {
+name: "{{ product.title }}",
+sku: "{{ variant.sku }}",
+gtin: "{{ variant.barcode }}",
+img: "{{ product.featured_media.preview_image | image_url: width: 500 }}",
+url: "https://REPLACE.myshopify.com{{ product.url }}",
+parent_id: "{{ product.title }}",
+products: variantskus,
+  
+        };
+
+</script>
+<!--Bottom of your page-->
+{% assign variant = product.first_available_variant %}
+<script
+src="https://www.resellerratings.com/productreviews/widget/javascript/YOUR_SEO_NAME.js?sku={{ variant.sku }}"></script>
+{% endfor %}
